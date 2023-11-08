@@ -77,3 +77,7 @@ function createPrintableContent() {
 }
 
 // ... (rest of the JavaScript code) ...
+const printButton = document.getElementById("printButton");
+printButton.addEventListener("click", () => {
+    window.print();
+});
