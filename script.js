@@ -6,7 +6,15 @@ document.addEventListener("DOMContentLoaded", function () {
     addRowButton.addEventListener("click", () => {
         const newRow = table.insertRow(table.rows.length - 1);
         const contentCell = newRow.insertCell(0);
-        contentCell.innerHTML = '<input type="text" class="content">';
+        contentCell.innerHTML = `
+            <select class="content">
+                <option value="">Select a vegetable</option>
+                <option value="Potato">Potato</option>
+                <option value="Tomato">Tomato</option>
+                <option value="Mirchi">Mirchi</option>
+                <!-- Add more vegetable options here -->
+            </select>
+        `;
         const priceCell = newRow.insertCell(1);
         priceCell.innerHTML = '<input type="number" class="price" min="0" step="0.01">';
         const qtyCell = newRow.insertCell(2);
@@ -16,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     table.addEventListener("input", function (e) {
-        if (e.target.className === "price" || e.target.className === "qty") {
+        if (e.target.className === "price" || e.target.className === "qty" || e.target.className === "content") {
             const row = e.target.parentElement.parentElement;
             const price = parseFloat(row.querySelector(".price").value) || 0;
             const qty = parseFloat(row.querySelector(".qty").value) || 0;
@@ -34,50 +42,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         totalAmount.textContent = sum.toFixed(2);
     }
-});
-
-// Add an event listener for the "Print" button
-const printButton = document.getElementById("printButton");
-printButton.addEventListener("click", () => {
-    // Create a printable format
-    const printContent = createPrintableContent();
     
-    // Open a new window for printing
-    const printWindow = window.open("", "", "width=600,height=600");
-    
-    // Write the printable content to the new window
-    printWindow.document.open();
-    printWindow.document.write('<html><head><title>Print</title></head><body>');
-    printWindow.document.write(printContent);
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    
-    // Wait for the content to load before printing
-    printWindow.addEventListener("load", () => {
-        printWindow.print();
-        printWindow.close();
+    // Add an event listener for the "Print" button
+    const printButton = document.getElementById("printButton");
+    printButton.addEventListener("click", () => {
+        window.print();
     });
-});
-
-function createPrintableContent() {
-    // Extract data from the table and format it for printing
-    const rows = document.querySelectorAll("table tr");
-    let printableContent = '<table>';
-    rows.forEach((row) => {
-        const cells = row.querySelectorAll("td");
-        printableContent += '<tr>';
-        cells.forEach((cell) => {
-            printableContent += `<td>${cell.innerHTML}</td>`;
-        });
-        printableContent += '</tr>';
-    });
-    printableContent += '</table>';
-    
-    return printableContent;
-}
-
-// ... (rest of the JavaScript code) ...
-const printButton = document.getElementById("printButton");
-printButton.addEventListener("click", () => {
-    window.print();
 });
