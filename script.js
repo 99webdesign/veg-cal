@@ -35,3 +35,45 @@ document.addEventListener("DOMContentLoaded", function () {
         totalAmount.textContent = sum.toFixed(2);
     }
 });
+
+// Add an event listener for the "Print" button
+const printButton = document.getElementById("printButton");
+printButton.addEventListener("click", () => {
+    // Create a printable format
+    const printContent = createPrintableContent();
+    
+    // Open a new window for printing
+    const printWindow = window.open("", "", "width=600,height=600");
+    
+    // Write the printable content to the new window
+    printWindow.document.open();
+    printWindow.document.write('<html><head><title>Print</title></head><body>');
+    printWindow.document.write(printContent);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    
+    // Wait for the content to load before printing
+    printWindow.addEventListener("load", () => {
+        printWindow.print();
+        printWindow.close();
+    });
+});
+
+function createPrintableContent() {
+    // Extract data from the table and format it for printing
+    const rows = document.querySelectorAll("table tr");
+    let printableContent = '<table>';
+    rows.forEach((row) => {
+        const cells = row.querySelectorAll("td");
+        printableContent += '<tr>';
+        cells.forEach((cell) => {
+            printableContent += `<td>${cell.innerHTML}</td>`;
+        });
+        printableContent += '</tr>';
+    });
+    printableContent += '</table>';
+    
+    return printableContent;
+}
+
+// ... (rest of the JavaScript code) ...
