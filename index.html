@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetable Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Vegetable Calculator</h1>
+        <table>
+            <tr>
+                <th>Content</th>
+                <th>Price (INR/Kg)</th>
+                <th>Qty (Gram and Kg)</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td><input type="text" class="content"></td>
+                <td><input type="number" class="price" min="0" step="0.01"></td>
+                <td><input type="number" class="qty" min="0" step="0.001"></td>
+                <td><span class="total">0</span></td>
+            </tr>
+        </table>
+        <button id="addRow">Add Row</button>
+        <div id="finalTotal">Total: <span id="totalAmount">0</span> INR</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
