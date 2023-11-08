@@ -17,22 +17,13 @@
                 <th>Total</th>
             </tr>
             <tr>
-                <td>
-                    <select class="content">
-                        <option value="">Select a vegetable</option>
-                        <option value="Potato">Potato</option>
-                        <option value="Tomato">Tomato</option>
-                        <option value="Mirchi">Mirchi</option>
-                        <!-- Add more vegetable options here -->
-                    </select>
-                </td>
+                <td><input type="text" class="content"></td>
                 <td><input type="number" class="price" min="0" step="0.01"></td>
                 <td><input type="number" class="qty" min="0" step="0.001"></td>
                 <td><span class="total">0</span></td>
             </tr>
         </table>
         <button id="addRow">Add Row</button>
-        <button id="printButton">Print</button>
         <div id="finalTotal">Total: <span id="totalAmount">0</span> INR</div>
     </div>
     <script src="script.js"></script>
